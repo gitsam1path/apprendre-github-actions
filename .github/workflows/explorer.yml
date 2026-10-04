@@ -29,7 +29,11 @@ jobs:
           echo "Branche : ${{ github.ref_name }}"
           echo "Commit : ${{ github.sha }}"
           echo "Déclenché par : ${{ github.actor }}"
+      - name: Étape qui échoue
+        run: exit 1
 
+      - name: Étape après l'échec
+        run: echo "Est-ce que je m'affiche ?"
   deuxieme-job:
     runs-on: ubuntu-latest
     steps:
