@@ -1,0 +1,37 @@
+name: Explorer le runner
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  explorer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Où suis-je ?
+        run: |
+          echo "Système :"
+          uname -a
+          echo "Dossier courant :"
+          pwd
+          echo "Contenu du dossier AVANT checkout :"
+          ls -la
+
+      - name: Récupérer le code du dépôt
+        uses: actions/checkout@v4
+
+      - name: Contenu du dossier APRÈS checkout
+        run: ls -la
+
+      - name: Informations sur l'événement
+        run: |
+          echo "Événement : ${{ github.event_name }}"
+          echo "Branche : ${{ github.ref_name }}"
+          echo "Commit : ${{ github.sha }}"
+          echo "Déclenché par : ${{ github.actor }}"
+
+  deuxieme-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Que voit ce job ?
+        run: ls -la
